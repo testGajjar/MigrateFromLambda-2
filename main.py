@@ -30,7 +30,11 @@ def cloud_run_handler():
     """
     try:
         # Access the message data from the request body
+        print('request')
+        print(request)
         data = request.get_json()
+        print('data')
+        print(data)
         messages = data.get('messages', [])  # Assuming 'messages' is the key
 
         for message in messages:
