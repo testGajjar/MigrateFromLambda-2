@@ -35,23 +35,23 @@ def cloud_run_handler():
         data = request.get_json()
         print('data')
         print(data)
-        messages = data.get('messages', [])  # Assuming 'messages' is the key
+        # messages = data.get('messages', [])  # Assuming 'messages' is the key
 
-        for message in messages:
-            message_data = {
-                'message-id': message['messageId'],
-                'body': message['body'],
-                'timestamp': datetime.now().isoformat()
-            }
+        # for message in messages:
+        message_data = {
+            'message-id': str(uuid.uuid4()),
+            'body': data,
+            'timestamp': datetime.now().isoformat()
+        }
 
-            # Publish message to Pub/Sub
-            future = publisher.publish(topic_path, json.dumps(message_data).encode("utf-8"))
-            print(f"Message sent to Pub/Sub: {message_data}")
+        # Publish message to Pub/Sub
+        future = publisher.publish(topic_path, json.dumps(message_data).encode("utf-8"))
+        print(f"Message sent to Pub/Sub: {message_data}")
 
-            # Write to Firestore
-            doc_ref = db.collection(COLLECTION_NAME).document()  # Auto-generate document ID
-            doc_ref.set(message_data)
-            print(f"Message sent to Firestore: {message_data}")
+        # Write to Firestore
+        doc_ref = db.collection(COLLECTION_NAME).document()  # Auto-generate document ID
+        doc_ref.set(message_data)
+        print(f"Message sent to Firestore: {message_data}")
 
         return {'success': True}, 200
 
