@@ -5,6 +5,7 @@ from datetime import datetime
 from google.cloud import pubsub_v1
 from google.cloud import firestore
 from flask import Flask, request
+import uuid
 
 # Environment variables
 PROJECT_ID = os.environ["PROJECT_ID"]
