@@ -7,6 +7,7 @@ from google.cloud import firestore
 from flask import Flask, request
 import uuid
 
+# adding a comment to test the auto-deployment
 # Environment variables
 PROJECT_ID = os.environ["PROJECT_ID"]
 TOPIC_ID = os.environ["TOPIC_ID"]
